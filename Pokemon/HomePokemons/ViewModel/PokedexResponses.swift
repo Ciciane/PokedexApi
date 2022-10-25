@@ -13,6 +13,7 @@ enum PokedexResponse{
     case serverError(description: ServerError)
     case timeOut(description: ServerError)
     case noConnection(description: ServerError)
+    case invalidResponse
 }
 
 enum PokemonResponse{
@@ -20,6 +21,7 @@ enum PokemonResponse{
     case serverError(description: ServerError)
     case timeOut(description: ServerError)
     case noConnection(description: ServerError)
+    case invalidResponse
 }
 
 enum ImageResponse{
@@ -27,5 +29,6 @@ enum ImageResponse{
     case serverError(description: ServerError)
     case timeOut(description: ServerError)
     case noConnection(description: ServerError)
+    case invalidResponse
 }
 

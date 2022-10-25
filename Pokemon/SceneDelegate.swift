@@ -21,7 +21,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
                 window?.windowScene = windowScene
                 window?.makeKeyAndVisible()
         
-                let navigation = HomeController()
+                let navigation = PokedexViewController()
                 let navController = UINavigationController(rootViewController: navigation)
                 window?.rootViewController = navController
     }

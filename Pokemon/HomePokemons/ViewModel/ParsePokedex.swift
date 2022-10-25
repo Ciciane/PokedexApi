@@ -34,7 +34,10 @@ class ParsePokedex {
         let id = response["id"] as? Int ?? 0
         let sprites = response["sprites"] as? [String: Any]
         let urlImage = sprites?["front_default"] as? String ?? ""
+        let types = response["types"] as? [Any] ?? []
+        let ability = response["ability"] as? String ?? ""
         
-        return PokemonModel(id: id, name: name, urlImage: urlImage)
+        return PokemonModel(id: id, name: name, urlImage: urlImage, types: types, ability: ability)
+        
     }
 }

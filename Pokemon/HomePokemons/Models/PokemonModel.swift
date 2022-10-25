@@ -12,6 +12,8 @@ struct PokemonModel {
     var id: Int
     var name: String
     var urlImage: String
+    var types: [Any]?
+    var ability: String
 }
 
 extension PokemonModel{
@@ -20,5 +22,11 @@ extension PokemonModel{
         self.id = 0
         self.name = ""
         self.urlImage = ""
+        self.types = []
+        self.ability = ""
     }
 }
+
+/*struct Tipos {
+    var type: {Str}
+}*/
