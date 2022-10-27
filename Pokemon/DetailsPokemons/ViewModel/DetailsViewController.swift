@@ -18,6 +18,25 @@ class DetailsViewController: UIViewController, RequestPokedexProtocol {
         super.viewDidLoad()
     }
     
+    func loadIdPokemon(pokemonId: Int){
+        requestPokedex.getPokemon(id: pokemonId){
+            (response) in
+            
+            switch response{
+            case .success(let model):
+                self.pokemons.append(model)
+            case .noConnection(let description):
+                print(description)
+            case .serverError(let description):
+                print(description)
+            case .timeOut(let description):
+                print(description)
+            case .invalidResponse:
+                print("Invalid Response")
+            }
+        }
+    }
+    
     func fetchData(pokemonName: String){
         requestPokedex.getDetailsPokemon(name: pokemonName){
             (response) in
@@ -26,6 +45,25 @@ class DetailsViewController: UIViewController, RequestPokedexProtocol {
             case .success(let model):
                 self.pokemons.append(model)
                 self.loadImagePokemon(url: model.urlImage)
+            case .noConnection(let description):
+                print(description)
+            case .serverError(let description):
+                print(description)
+            case .timeOut(let description):
+                print(description)
+            case .invalidResponse:
+                print("Invalid Response")
+            }
+        }
+    }
+    
+    func loadTypePokemon(pokemonType: [Any]){
+        requestPokedex.getTypePokemon(type: pokemonType){
+            (response) in
+            
+            switch response{
+            case .success(let model):
+                self.pokemons.append(model)
             case .noConnection(let description):
                 print(description)
             case .serverError(let description):

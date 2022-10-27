@@ -123,6 +123,38 @@ class RequestPokedex {
       }
     }
     
+    func getTypePokemon(type: [Any], completion: @escaping (_ response: PokemonResponse) -> Void){
+      alamofireManager.request("\(PokemonAPIURL.Main)\(type)/", method: .get, parameters: nil, encoding: JSONEncoding.default).responseJSON {
+          (response) in
+        let statusCode = response.response?.statusCode
+        switch response.result {
+          case .success(let value):
+            let resultValue = value as? [String: Any]
+            if statusCode == 404 {
+              if let description = resultValue?["detail"] as? String {
+                let error = ServerError(msgError: description, statusCode: statusCode!)
+                completion(.serverError(description: error))
+              }
+            }
+            else if statusCode == 200 {
+              let model = self.parse.parsePokemon(response: resultValue)
+              completion(.success(model: model))
+            }
+          case .failure(let error):
+            let errorCode = error._code
+            if errorCode == -1009 {
+                let erro = ServerError(msgError: error.localizedDescription, statusCode: errorCode)
+              completion(.noConnection(description: erro))
+            }
+            else if errorCode == -1001 {
+                let erro = ServerError(msgError: error.localizedDescription, statusCode: errorCode)
+              completion(.timeOut(description: erro))
+            }
+        }
+      }
+    }
+
+    
     func getImagePokemon(url:String, completion:@escaping PokedexImageCompletion){
             alamofireManager.request(url, method: .get).responseData {
                 (response) in

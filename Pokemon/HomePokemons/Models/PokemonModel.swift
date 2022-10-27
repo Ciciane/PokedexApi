@@ -12,7 +12,7 @@ struct PokemonModel {
     var id: Int
     var name: String
     var urlImage: String
-    var types: [Any]?
+    let types: [Any]
     var ability: String
 }
 
@@ -27,6 +27,14 @@ extension PokemonModel{
     }
 }
 
-/*struct Tipos {
-    var type: {Str}
-}*/
+// MARK: - TypeElement
+struct TypeElement {
+    let slot: Int?
+    let type: TypeType?
+}
+
+// MARK: - TypeType
+struct TypeType {
+    let name: String?
+    let url: String?
+}

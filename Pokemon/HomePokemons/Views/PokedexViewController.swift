@@ -139,8 +139,14 @@ class PokedexViewController: UITableViewController, RequestPokedexProtocol {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cell = tableView.dequeueReusableCell(withIdentifier: CellIdentifier.NormalCell) as? PokemonViewCell
 
-        let pokemon = pokemons[indexPath.row].name 
-        var detailsView = PokedexDetailsView(namePokemon: pokemon)
+        let pokemon = pokemons[indexPath.row].name
+        let id = pokemons[indexPath.row].id
+        let type = pokemons[indexPath.row].types
+        guard let pokemonData = imagePokemons.first, var pokemonImage = UIImage(data: pokemonData) else {
+            return
+        }
+  //      var pokemonImage = UIImage(data: pokemonData)
+        var detailsView = PokedexDetailsView(namePokemon: pokemon, idPokemon: id, typePokemon: type, imagePokemon: pokemonImage)
         
         navigationController?.pushViewController(detailsView, animated: true)
     }

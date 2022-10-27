@@ -148,8 +148,8 @@
 		96ED4A9628FDCFB6001317FF /* Pokemon */ = {
 			isa = PBXGroup;
 			children = (
-				96B5B9F229007F53007CB3C0 /* DetailsPokemons */,
 				96B5B9F129007E8F007CB3C0 /* HomePokemons */,
+				96B5B9F229007F53007CB3C0 /* DetailsPokemons */,
 				96ED4A9728FDCFB6001317FF /* AppDelegate.swift */,
 				96ED4A9928FDCFB6001317FF /* SceneDelegate.swift */,
 				96ED4AA028FDCFB8001317FF /* Assets.xcassets */,
