@@ -28,7 +28,9 @@ class ParsePokedex {
     }
     
     func parsePokemon(response: [String: Any]?) ->PokemonModel{
-        guard let response = response else { return PokemonModel() }
+        guard let response = response else {
+            return PokemonModel()
+        }
         
         let name = response["name"] as? String ?? ""
         let id = response["id"] as? Int ?? 0

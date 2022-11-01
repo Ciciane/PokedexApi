@@ -146,7 +146,7 @@ class PokedexViewController: UITableViewController, RequestPokedexProtocol {
             return
         }
   //      var pokemonImage = UIImage(data: pokemonData)
-        var detailsView = PokedexDetailsView(namePokemon: pokemon, idPokemon: id, typePokemon: type, imagePokemon: pokemonImage)
+       var detailsView = PokedexDetailsView(namePokemon: pokemon, idPokemon: id, typePokemon: type, imagePokemon: pokemonImage)
         
         navigationController?.pushViewController(detailsView, animated: true)
     }

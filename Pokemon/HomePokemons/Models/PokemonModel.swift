@@ -30,11 +30,11 @@ extension PokemonModel{
 // MARK: - TypeElement
 struct TypeElement {
     let slot: Int?
-    let type: TypeType?
+    let type: Species
 }
 
 // MARK: - TypeType
-struct TypeType {
-    let name: String?
-    let url: String?
+struct Species {
+    let name: String
+    let url: String
 }

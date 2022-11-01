@@ -12,9 +12,10 @@ class PokedexDetailsView: UIViewController {
     
     var namePokemon: String
     var idPokemon: Int
-    var typePokemon: [Any]?
+    var typePokemon: [Any]
     var imagePokemon: UIImage
     let controller = DetailsViewController()
+    var typesName = [String]()
     
     let imageViewPokemon: UIImageView = {
         let imagePokemon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
@@ -82,13 +83,36 @@ class PokedexDetailsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-    
+        configureTypePokemon(typePokemon: typePokemon)
+
         namePokemonLb.text = namePokemon
         idLabel.text = "Pokemon Id \(idPokemon)"
-        typePokemonLb.text = "\(typePokemon)"
+        typePokemonLb.text = "Tipos: \(typesName.description)"
         imageViewPokemon.image = imagePokemon
         setup()
         
+    }
+    
+    private func configureTypePokemon(typePokemon: [Any]){ //-> String{
+        
+        var typesAndSlot = [[String: Any]]()
+        typesAndSlot = typePokemon as! [[String : Any]]
+        var types = [[String: Any]]()
+        var namesAndUrls = [[String: Any]]()
+        
+        for i in typesAndSlot {
+            types.append(i["type"] as! [String: Any])
+            for index in i {
+                if index.key == "type" {
+                    namesAndUrls.append(index.value as! [String: Any])
+                }
+            }
+         }
+     
+        
+        for i in namesAndUrls {
+            typesName.append(i["name"] as! String)
+        }
     }
 
     private func setup() {
