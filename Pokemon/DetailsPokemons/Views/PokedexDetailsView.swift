@@ -18,15 +18,13 @@ class PokedexDetailsView: UIViewController {
     var typesName = [String]()
     
     let imageViewPokemon: UIImageView = {
-        let imagePokemon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
-        imagePokemon.contentMode = .scaleAspectFill
-        imagePokemon.layer.cornerRadius = 8
-        imagePokemon.clipsToBounds = true
-        imagePokemon.heightAnchor.constraint(equalToConstant: 200).isActive = true
-        imagePokemon.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        imagePokemon.translatesAutoresizingMaskIntoConstraints = false
+        let imageViewPokemon = UIImageView(frame: CGRectMake(0, 0, 100, 100))
+        imageViewPokemon.contentMode = .scaleAspectFit
+        imageViewPokemon.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        imageViewPokemon.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        imageViewPokemon.translatesAutoresizingMaskIntoConstraints = false
         
-        return imagePokemon
+        return imageViewPokemon
     }()
     
     let idLabel: UILabel = {
@@ -83,9 +81,11 @@ class PokedexDetailsView: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         configureTypePokemon(typePokemon: typePokemon)
 
-        namePokemonLb.text = namePokemon
+        namePokemonLb.text = namePokemon.capitalized
         idLabel.text = "Pokemon Id \(idPokemon)"
         typePokemonLb.text = "Tipos: \(typesName.description)"
         imageViewPokemon.image = imagePokemon
@@ -122,13 +122,12 @@ class PokedexDetailsView: UIViewController {
         NSLayoutConstraint.activate([
             imageViewPokemon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             imageViewPokemon.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            imageViewPokemon.topAnchor.constraint(equalTo: view.topAnchor, constant: 70)
+            imageViewPokemon.topAnchor.constraint(equalTo: view.topAnchor, constant: 150)
         ])
         
         self.view.addSubview(idLabel)
         NSLayoutConstraint.activate([
             idLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 20),
-       //     idLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -34),
             idLabel.topAnchor.constraint(equalTo: imageViewPokemon.bottomAnchor, constant: 15)
         ])
         

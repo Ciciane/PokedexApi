@@ -39,7 +39,7 @@ class PokemonViewCell: UITableViewCell {
     
     public func configureCell(withModel model: PokemonModel, pokemonSpriteData data:Data) {
         self.pokemonIdLb.text = "Pokemon Id \(model.id)"
-        self.pokemonNameLb.text = model.name
+        self.pokemonNameLb.text = model.name.capitalized
         self.imgView.image = UIImage(data: data)
     }
     

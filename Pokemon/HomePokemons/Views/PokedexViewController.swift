@@ -112,6 +112,14 @@ class PokedexViewController: UITableViewController, RequestPokedexProtocol {
         tableView.register(PokemonViewCell.self, forCellReuseIdentifier: "cell")
     }
     
+    func convertUrlToUIImage(url: String) -> UIImage? {
+        guard let urlConvert = URL(string: url), let data = try? Data(contentsOf: urlConvert) else {
+            return nil
+        }
+        
+        let image = UIImage(data: data)
+        return image
+    }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return resultModel?.next == "" ? resultCount : resultCount + 1
@@ -142,13 +150,18 @@ class PokedexViewController: UITableViewController, RequestPokedexProtocol {
         let pokemon = pokemons[indexPath.row].name
         let id = pokemons[indexPath.row].id
         let type = pokemons[indexPath.row].types
-        guard let pokemonData = imagePokemons.first, var pokemonImage = UIImage(data: pokemonData) else {
-            return
-        }
-  //      var pokemonImage = UIImage(data: pokemonData)
-       var detailsView = PokedexDetailsView(namePokemon: pokemon, idPokemon: id, typePokemon: type, imagePokemon: pokemonImage)
+        let urlImage = pokemons[indexPath.row].urlImage
         
-        navigationController?.pushViewController(detailsView, animated: true)
+        if !urlImage.isEmpty {
+            guard let pokemonImage = convertUrlToUIImage(url: urlImage) else {
+                return
+            }
+            var detailsView = PokedexDetailsView(namePokemon: pokemon, idPokemon: id, typePokemon: type, imagePokemon: pokemonImage)
+            navigationController?.pushViewController(detailsView, animated: true)
+        }else {
+            var detailsView = PokedexDetailsView(namePokemon: pokemon, idPokemon: id, typePokemon: type, imagePokemon: UIImage())
+            navigationController?.pushViewController(detailsView, animated: true)
+        }
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -162,3 +175,4 @@ class PokedexViewController: UITableViewController, RequestPokedexProtocol {
     }
     
 }
+//0x600001a48000
